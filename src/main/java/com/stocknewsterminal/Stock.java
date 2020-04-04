@@ -1,52 +1,56 @@
 package com.stocknewsterminal;
 
-import java.util.Map;
+import com.google.gson.Gson;
 
 public class Stock {
 
-    static String ticker;
-    static float price;
-    static float high;
-    static float low;
-    static Map news;
-    static String company;
+    private News news;
+    private Profile profile;
+    private String jsonStringNews;
+    private String jsonStringInfo;
 
     public Stock(String ticker) throws Exception {
-        this.ticker = ticker;
-        FetchAPI api = new FetchAPI(ticker);
-        this.price = api.fetchPrice();
-        this.high = api.fetchHigh();
-        this.low = api.fetchLow();
-        this.company = api.fetchCompany();
-//        this.news = FetchAPI.fetchNews(ticker);
+        JSONStringBuilder jsonStringBuilder = new JSONStringBuilder(ticker);
+        String jsonStringNews = jsonStringBuilder.getJsonStringNews();
+        String jsonStringProfile = jsonStringBuilder.getJsonStringProfile();
+        this.profile = buildProfile(jsonStringProfile);
+//        this.news = buildNews(jsonStringNews);
     }
 
-    public String getTicker(){
-        return ticker;
+    private Profile buildProfile(String jsonString){
+        Gson gson = new Gson();
+        Profile profile = gson.fromJson(jsonString, Profile.class);
+        return profile;
     }
 
-    public float getPrice(){
-        return price;
-    }
-
-    public Map getNews(){
+    public News buildNews(String jsonString){
+        Gson gson = new Gson();
+        News news = gson.fromJson(jsonString, News.class);
         return news;
     }
 
-    public float getHigh() {
-        return high;
+    public String getPriceLatest(){
+        return Float.toString(profile.getLatestPrice());
     }
 
-    public float getLow() {
-        return low;
+    public String getPriceHigh(){
+        return Float.toString(profile.getHigh());
     }
 
-    public String getCompany() {
-        return company;
+    public String getPriceLow(){
+        return Float.toString(profile.getLow());
     }
 
-    public static void main(String[] args) {
+    public String getSymbol(){
+        return profile.getSymbol();
     }
 
+    public News getNews(){
+        return news;
+    }
+
+    public String getCompanyName() {
+        return profile.getCompanyName();
+    }
 
 }

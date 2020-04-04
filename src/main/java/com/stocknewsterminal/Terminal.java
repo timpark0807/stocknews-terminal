@@ -10,21 +10,15 @@ import java.io.File;
 
 public class Terminal {
 
-    static String ticker;
-    static String price;
-    static String high;
-    static String low;
-    static String company;
-
     public static void display(Stock stock) {
-        ticker = stock.getTicker();
-        company = stock.getCompany();
-        price = Float.toString(stock.getPrice());
-        high = Float.toString(stock.getHigh());
-        low = Float.toString(stock.getLow());
+        String symbol = stock.getSymbol();
+        String company = stock.getCompanyName();
+        String price = stock.getPriceLatest();
+        String high = stock.getPriceHigh();
+        String low = stock.getPriceLow();
 
         Stage window = new Stage();
-        window.setTitle(ticker);
+        window.setTitle("$" + symbol);
         window.setMinWidth(25);
 
         GridPane grid = new GridPane();
@@ -32,19 +26,28 @@ public class Terminal {
         grid.setVgap(8);
         grid.setHgap(10);
 
-        Label tickerLabel = new Label("$" + ticker);
+        Label symbolLabel = new Label("$" + symbol);
         Label companyLabel = new Label(company);
-        Label priceLabel = new Label(price);
-        Label highLabel = new Label(high);
-        Label lowLabel = new Label(low);
+        Label priceLabel = new Label("Price");
+        Label highLabel = new Label("High");
+        Label lowLabel = new Label("Low");
+        Label priceValue = new Label(price);
+        Label highValue = new Label(high);
+        Label lowValue = new Label(low);
 
-        GridPane.setConstraints(tickerLabel, 0, 0);
-        GridPane.setConstraints(companyLabel, 0, 1);
-        GridPane.setConstraints(priceLabel, 2, 1);
-        GridPane.setConstraints(highLabel, 3, 1);
-        GridPane.setConstraints(lowLabel, 4, 1);
+        GridPane.setConstraints(companyLabel, 0, 0);
+        GridPane.setConstraints(symbolLabel, 1, 0);
 
-        grid.getChildren().addAll(tickerLabel, priceLabel, highLabel, lowLabel, companyLabel);
+        GridPane.setConstraints(priceLabel, 0, 1);
+        GridPane.setConstraints(priceValue, 1, 1);
+
+        GridPane.setConstraints(highLabel, 0, 2);
+        GridPane.setConstraints(highValue, 1, 2);
+
+        GridPane.setConstraints(lowLabel, 0, 3);
+        GridPane.setConstraints(lowValue, 1, 3);
+
+        grid.getChildren().addAll(symbolLabel, priceLabel, highLabel, highValue, lowLabel, lowValue, companyLabel, priceValue);
         Scene scene = new Scene(grid, 450, 300);
         scene.getStylesheets().add((new File("src/resources/style.css")).toURI().toString());
         window.setScene(scene);
