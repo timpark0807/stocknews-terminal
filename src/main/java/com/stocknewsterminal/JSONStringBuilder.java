@@ -14,14 +14,14 @@ public class JSONStringBuilder {
         }
 
         public String getJsonStringNews() throws Exception {
-            String newsUrl = "https://cloud.iexapis.com/stable/stock/%s/news?last=10&token=pk_9c9d7383c24748a8adaa5d85544c5fa9";
+            String newsUrl = "https://cloud.iexapis.com/stable/stock/%s/news?last=10&token=ENTERTOKENHERE";
             HttpURLConnection con = getHttpURLConnection(newsUrl);
             String jsonString = getJSONString(con);
             return jsonString;
         }
 
         public String getJsonStringProfile() throws Exception {
-            String apiUrl = "https://cloud.iexapis.com/stable/stock/%s/quote?token=pk_9c9d7383c24748a8adaa5d85544c5fa9";
+            String apiUrl = "https://cloud.iexapis.com/stable/stock/%s/quote?token=ENTERTOKENHERE";
             HttpURLConnection con = getHttpURLConnection(apiUrl);
             String jsonString = getJSONString(con);
             return jsonString;
