@@ -1,7 +1,5 @@
 package com.stocknewsterminal;
 
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -16,7 +14,7 @@ public class JSONStringBuilder {
         }
 
         public String getJsonStringNews() throws Exception {
-            String newsUrl = "https://cloud.iexapis.com/stable/stock/MSFT/news?last=5&token=pk_9c9d7383c24748a8adaa5d85544c5fa9";
+            String newsUrl = "https://cloud.iexapis.com/stable/stock/%s/news?last=10&token=pk_9c9d7383c24748a8adaa5d85544c5fa9";
             HttpURLConnection con = getHttpURLConnection(newsUrl);
             String jsonString = getJSONString(con);
             return jsonString;

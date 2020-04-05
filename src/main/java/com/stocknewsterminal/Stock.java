@@ -2,9 +2,12 @@ package com.stocknewsterminal;
 
 import com.google.gson.Gson;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Stock {
 
-    private News news;
+    private News[] news;
     private Profile profile;
     private String jsonStringNews;
     private String jsonStringInfo;
@@ -14,7 +17,15 @@ public class Stock {
         String jsonStringNews = jsonStringBuilder.getJsonStringNews();
         String jsonStringProfile = jsonStringBuilder.getJsonStringProfile();
         this.profile = buildProfile(jsonStringProfile);
-//        this.news = buildNews(jsonStringNews);
+
+//        Gson gson = new Gson();
+//        News[] news = gson.fromJson(jsonStringNews, News[].class);
+        this.news = buildNews(jsonStringNews);
+        for (News i : news) {
+            System.out.println(i.getHeadline());
+            System.out.println(i.getUrl());
+        }
+
     }
 
     private Profile buildProfile(String jsonString){
@@ -23,9 +34,9 @@ public class Stock {
         return profile;
     }
 
-    public News buildNews(String jsonString){
+    public News[] buildNews(String jsonString){
         Gson gson = new Gson();
-        News news = gson.fromJson(jsonString, News.class);
+        News[] news = gson.fromJson(jsonString, News[].class);
         return news;
     }
 
@@ -45,7 +56,7 @@ public class Stock {
         return profile.getSymbol();
     }
 
-    public News getNews(){
+    public News[] getNews(){
         return news;
     }
 
