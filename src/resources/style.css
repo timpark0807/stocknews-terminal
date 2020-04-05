@@ -23,7 +23,7 @@
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: rgb(0, 80, 100);
+    -fx-accent: rgb(0, 80, 0);
 
     /* color of non-focused yet selected elements */
     -fx-selection-bar-non-focused: rgb(50, 50, 50);
@@ -54,3 +54,20 @@
 .scroll-bar > .decrement-button:pressed > .decrement-arrow {
     -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
 }
+
+.table-view{
+       -fx-border-color: black;
+      -fx-focus-color: black;
+
+        -fx-faint-focus-color: rgb(0, 80, 0);
+
+}
+
+.text-field {
+    -fx-focus-color: green;
+}
+
+.button {
+     -fx-focus-color: green;
+ }
+
